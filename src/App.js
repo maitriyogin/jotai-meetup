@@ -1,19 +1,22 @@
 import "./App.css";
-
 import { useAtom } from "jotai";
 import { Count1 } from "./Count1";
 import { Count2 } from "./Count2";
 import { Count3, CountTotal } from "./Count3";
 import { totalCount } from "./count-atom";
+import { useApollo } from "./apollo-client";
 function App() {
   // const tc = useAtom(totalCount);
+  const messages = useApollo();
   return (
     <div className="App">
       <header className="App-header">
         Total Count : <CountTotal />
       </header>
       <div className="Count-Container">
-        <Count3 />
+        {messages.map((m, i) => (
+          <div key={i}>{JSON.stringify(m)}</div>
+        ))}
       </div>
     </div>
   );
